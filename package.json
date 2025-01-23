@@ -1,0 +1,31 @@
+{
+  "name": "@unlimdev/bunnycdn-storage",
+  "version": "1.0.1",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnlimDev/bunnycdn-storage.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "npx eslint src/"
+  },
+  "author": "Dexter Morganov",
+  "license": "MIT",
+  "description": "BunnyCDN EDGE Storage API Client",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@types/node": "^22.10.9",
+    "globals": "^15.14.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  },
+  "bugs": {
+    "url": "https://github.com/UnlimDev/bunnycdn-storage/issues"
+  },
+  "homepage": "https://github.com/UnlimDev/bunnycdn-storage#readme"
+}

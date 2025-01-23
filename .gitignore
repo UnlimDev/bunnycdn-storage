@@ -1,0 +1,8 @@
+# IDE Settings
+.idea
+
+# Geenrated output
+dist
+
+# Installed dependencies
+node_modules
