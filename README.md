@@ -29,6 +29,7 @@ Module reads the following environment variables **if no corresponding values pr
 * `BUNNY_CDN_STORAGE_ZONE` - the name of the StorageZone to use
 * `BUNNY_CDN_API_KEY` - the API key (password) for authorization
 * `BUNNY_CDN_REGION` - primary region code for StorageZone
+* `BUNNY_CDN_PREFIX` - optional path to limit file operations
 
 The list of codes for non-default regions listed [here](https://docs.bunny.net/reference/storage-api#storage-endpoints). 
 
@@ -36,6 +37,7 @@ The list of codes for non-default regions listed [here](https://docs.bunny.net/r
 export BUNNY_CDN_STORAGE_ZONE="my-zone-name"
 export BUNNY_CDN_API_KEY="read-write-key-password"
 export BUNNY_CDN_REGION="ny" # if not set, defaults to Falkenstein (storage.bunnycdn.com)
+export BUNNY_CDN_PREFIX="static"
 ```
 
 ```js

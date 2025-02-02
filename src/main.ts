@@ -7,7 +7,7 @@ const baseStorageDomain: string = 'storage.bunnycdn.com'
 export class BunnyCDNStorage {
     private readonly client: AxiosInstance
 
-    constructor(storageZoneName?: string, apiKey?: string, region?: string) {
+    constructor(storageZoneName?: string, apiKey?: string, region?: string, prefix?: string) {
         const storageRegion: string = region ?
             region : process.env.BUNNY_CDN_REGION || ''
 
@@ -15,15 +15,20 @@ export class BunnyCDNStorage {
         const storageApiKey: string = apiKey || process.env.BUNNY_CDN_API_KEY || ''
         const storageZone: string = storageZoneName || process.env.BUNNY_CDN_STORAGE_ZONE || ''
 
+        let pathPrefix: string = (prefix !== undefined && prefix !== null) ? prefix : process.env.BUNNY_CDN_PREFIX || ''
+        while (pathPrefix.length > 0 && pathPrefix.endsWith('/')) {
+            pathPrefix = pathPrefix.substring(0, pathPrefix.length - 1)
+        }
+        pathPrefix = pathPrefix.length > 0 ? pathPrefix + '/' : ''
+
         this.client = axios.create({
-            baseURL: `https://${storageHost}/${storageZone}/`,
+            baseURL: `https://${storageHost}/${storageZone}/${pathPrefix}`,
             headers: {
                 AccessKey: storageApiKey,
             },
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
         })
-
     }
 
     async list(path?: string) : AxiosPromise<any> {
@@ -36,7 +41,7 @@ export class BunnyCDNStorage {
     async delete(path?: string) : AxiosPromise<any> {
         return this.client({
             method: 'DELETE',
-            url: path
+            url: path,
         })
     }
 
@@ -54,13 +59,11 @@ export class BunnyCDNStorage {
             file = fileOrPath;
         }
 
-        const response = await this.client({
+        return await this.client({
             method: 'PUT',
             url: remotePath,
             data: file
         })
-
-        return response;
     }
 
     async download(filePath: string, responseType?: ResponseType) : AxiosPromise<any> {
